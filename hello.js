@@ -1,1 +1,1 @@
-let a = navigator;
+fkkkkk;
