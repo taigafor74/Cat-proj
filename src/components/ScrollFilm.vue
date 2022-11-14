@@ -24,12 +24,7 @@ export default {
   name: "ScrollFilm",
   data() {
     return {
-      basicUrl: "http://localhost:3000",
-      hotfilm: [
-        {
-          url: require("../assets/25bfd6ddb53c7e5015d23c5bc24d876c03d41.jpg"),
-        },
-      ],
+      basicUrl: "http://101.43.168.167:3000/",
       data: [],
     };
   },
@@ -40,10 +35,12 @@ export default {
     },
   },
   mounted() {
-    axios.get("http://localhost:3000/api/admin/getAllMovie").then((res) => {
-      this.data = res.data.data;
-      // console.log(this.data);
-    });
+    axios
+      .get("http://101.43.168.167:3000/api/admin/getAllMovie")
+      .then((res) => {
+        this.data = res.data.data;
+        // console.log(this.data);
+      });
   },
 };
 </script>

@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="c-con">
     <router-link to="/ForAdmin/AdminAddfilm"
       ><div>
@@ -76,4 +76,4 @@ a {
   text-decoration: none;
   display: block;
 }
-</style>
+</style> -->

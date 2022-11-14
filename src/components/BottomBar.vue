@@ -22,7 +22,7 @@ export default {
           text: "首页",
         },
         {
-          url: require("../assets/电影院.png"),
+          url: require("../assets/why.png"),
           active: require("../assets/电影院-激活.png"),
           text: "电影",
         },
@@ -61,6 +61,15 @@ export default {
         this.$refs.imglist[index].src = item.url;
       }
     });
+  },
+  watch: {
+    $route: {
+      immediate: true,
+      deep: true,
+      handler: function (newVal, oldVal) {
+        console.log(newVal, oldVal);
+      },
+    },
   },
 };
 </script>

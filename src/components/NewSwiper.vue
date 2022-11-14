@@ -9,12 +9,24 @@
     >
       <transition name="slide">
         <ul ref="ul" class="imgList cleart">
-          <li><img src="http://localhost:3000/static/img/4.3dfbc92.jpg" /></li>
-          <li><img src="http://localhost:3000/static/img/1.1abcd57.jpg" /></li>
-          <li><img src="http://localhost:3000/static/img/2.cf7651e.jpg" /></li>
-          <li><img src="http://localhost:3000/static/img/3.cafea12.jpg" /></li>
-          <li><img src="http://localhost:3000/static/img/4.3dfbc92.jpg" /></li>
-          <li><img src="http://localhost:3000/static/img/1.1abcd57.jpg" /></li>
+          <li>
+            <img src="http://101.43.168.167:3000/static/img/4.3dfbc92.jpg" />
+          </li>
+          <li>
+            <img src="http://101.43.168.167:3000/static/img/1.1abcd57.jpg" />
+          </li>
+          <li>
+            <img src="http://101.43.168.167:3000/static/img/2.cf7651e.jpg" />
+          </li>
+          <li>
+            <img src="http://101.43.168.167:3000/static/img/3.cafea12.jpg" />
+          </li>
+          <li>
+            <img src="http://101.43.168.167:3000/static/img/4.3dfbc92.jpg" />
+          </li>
+          <li>
+            <img src="http://101.43.168.167:3000/static/img/1.1abcd57.jpg" />
+          </li>
         </ul>
       </transition>
       <!-- <ul class="uList">

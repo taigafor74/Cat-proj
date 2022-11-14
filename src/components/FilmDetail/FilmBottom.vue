@@ -3,7 +3,7 @@
     <img
       src="https://obj.pipi.cn/festatic/asgard/resources/images/movie/share-icon.png"
     />
-    <a class="buyticket">特惠购票</a>
+    <router-link to="/ChoseSeat" class="buyticket">特惠购票</router-link>
   </div>
 </template>
 

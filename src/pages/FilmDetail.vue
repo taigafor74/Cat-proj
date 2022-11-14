@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../utils/request.js";
 import FilmScore from "@/components/FilmDetail/FilmScore.vue";
 import MyDownbar from "../components/MyDownbar.vue";
 import LittleNav from "../components/FilmDetail/LittleNav.vue";
@@ -41,7 +41,7 @@ export default {
   created() {
     axios
       .get(
-        `http://localhost:3000/api/getMovieDetail?movieId=${this.$route.query.movie_id}`
+        `http://101.43.168.167:3000/api/getMovieDetail?movieId=${this.$route.query.movie_id}`
       )
       .then((res) => {
         this.data = res.data.data[0];

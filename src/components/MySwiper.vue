@@ -8,11 +8,11 @@
         ref="imgList"
         class="imgList setTrans"
       >
-        <img src="http://localhost:3000/static/img/1.1abcd57.jpg" />
-        <img src="http://localhost:3000/static/img/2.cf7651e.jpg" />
-        <img src="http://localhost:3000/static/img/3.cafea12.jpg" />
-        <img src="http://localhost:3000/static/img/4.3dfbc92.jpg" />
-        <img src="http://localhost:3000/static/img/1.1abcd57.jpg" />
+        <img src="http://101.43.168.167:3000/static/img/1.1abcd57.jpg" />
+        <img src="http://101.43.168.167:3000/static/img/2.cf7651e.jpg" />
+        <img src="http://101.43.168.167:3000/static/img/3.cafea12.jpg" />
+        <img src="http://101.43.168.167:3000/static/img/4.3dfbc92.jpg" />
+        <img src="http://101.43.168.167:3000/static/img/1.1abcd57.jpg" />
       </div>
       <ul class="uList">
         <li v-for="(item, index) in 4" @click="showindex(index)" :key="index">

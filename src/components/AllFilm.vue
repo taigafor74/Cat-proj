@@ -2,6 +2,7 @@
   <div>
     <div class="FilmContainer" v-for="item in data" :key="item.movie_id">
       <router-link
+        v-loading="show"
         style="display: flex; text-decoration: none"
         :to="{ path: '/FilmDetail', query: { movie_id: item.movie_id } }"
       >
@@ -35,13 +36,19 @@ export default {
     return {
       basicUrl: "http://localhost:3000",
       data: [],
+      show: true,
     };
   },
   mounted() {
-    axios.get("http://localhost:3000/api/admin/getAllMovie").then((res) => {
+    axios.get("/api/admin/getAllMovie").then((res) => {
       this.data = res.data.data;
+      console.log(res);
       console.log(this.data);
+      console.log(this.$store.state.isLoading);
     });
+  },
+  updated() {
+    this.show = false;
   },
 };
 </script>
@@ -69,7 +76,7 @@ export default {
   border: 0px;
 }
 .FilmContainer {
-  width: 100.1173vw;
+  width: 100.088vw;
   height: 30.4vw;
   display: flex;
   padding-left: 4vw;

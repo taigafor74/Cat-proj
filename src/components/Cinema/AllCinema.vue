@@ -27,7 +27,7 @@ export default {
     };
   },
   mounted() {
-    axios.get("http://localhost:3000/api/getCinemaList").then((res) => {
+    axios.get("http://101.43.168.167:3000/api/getCinemaList").then((res) => {
       this.data = res.data.data;
     });
   },
