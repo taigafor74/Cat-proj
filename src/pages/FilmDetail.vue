@@ -7,6 +7,10 @@
       <FilmScore />
       <FilmIntroduction :intro="intro" style="margin-top: 3vw" />
     </div>
+    <div style="background-color: rgb(102, 77, 41)">
+      <FilmComment :commentData="commentData"></FilmComment>
+    </div>
+    <div style="height: 16vw"></div>
     <div class="fix-b">
       <FilmBottom />
     </div>
@@ -21,6 +25,7 @@ import LittleNav from "../components/FilmDetail/LittleNav.vue";
 import FilmOverview from "../components/FilmDetail/FilmOverview.vue";
 import FilmIntroduction from "../components/FilmDetail/FilmIntroduction.vue";
 import FilmBottom from "../components/FilmDetail/FilmBottom.vue";
+import FilmComment from "../components/FilmDetail/FilmComment.vue";
 export default {
   name: "FilmDetail",
   data() {
@@ -28,6 +33,7 @@ export default {
       data: {},
       overview: {},
       intro: "",
+      commentData: {},
     };
   },
   components: {
@@ -37,6 +43,7 @@ export default {
     FilmIntroduction,
     FilmBottom,
     FilmScore,
+    FilmComment,
   },
   created() {
     axios
@@ -59,6 +66,14 @@ export default {
         };
         this.intro = this.data.intro;
       });
+    axios
+      .get(
+        `http://101.43.168.167:3000/api/getAllUserPassComment?movieId=${this.$route.query.movie_id}`
+      )
+      .then((res) => {
+        console.log(res.data.data[0]);
+        this.commentData = res.data.data[0];
+      });
   },
 };
 </script>
@@ -66,7 +81,7 @@ export default {
 <style scoped>
 .container {
   width: 100.088vw;
-  height: 100vh;
+  /* height: 100%; */
   background-color: rgb(102, 77, 41);
   padding: 5.6vw 4.2667vw;
 }

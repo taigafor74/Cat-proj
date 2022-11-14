@@ -43,6 +43,7 @@ export default {
   background-color: rgb(46, 46, 66);
   border-radius: 2.6667vw;
   padding: 3.2vw;
+  margin-bottom: 5.3333vw;
 }
 .I-title {
   display: flex;
