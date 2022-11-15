@@ -35,9 +35,10 @@ export default {
       handler(newval) {
         console.log(newval);
         this.data = newval;
-        this.data.comment_date =
-          this.data.comment_date.match(/(?<=-)\d{2}-\d{2}/)[0];
-        console.log(this.data.comment_date);
+        if (this.data) {
+          this.data.comment_date =
+            this.data.comment_date.match(/(?<=-)\d{2}-\d{2}/)[0];
+        }
       },
     },
   },

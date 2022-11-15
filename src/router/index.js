@@ -10,6 +10,7 @@ import FilmPage from "../pages/FilmPage";
 import CinemaPage from "../pages/CinemaPage";
 import CinemaDetail from "../components/Cinema/CinemaDetail";
 import UserPage from "../pages/UserPage";
+import SearchMovie from "../pages/SearchMovie";
 export default new VueRouter({
   routes: [
     {
@@ -35,6 +36,10 @@ export default new VueRouter({
     {
       path: "/UserPage",
       component: UserPage,
+    },
+    {
+      path: "/SearchMovie",
+      component: SearchMovie,
     },
     {
       path: "/CinemaPage",

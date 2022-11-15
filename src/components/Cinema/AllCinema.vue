@@ -1,19 +1,22 @@
 <template>
   <div>
-    <router-link to="/CinemaDetail"
-      ><div class="cinema-item" v-for="item in data" :key="item.cinema_id">
-        <div class="left">
-          <div class="cinema-name ellipsis">{{ item.cinema_name }}</div>
-          <div class="cinema-address ellipsis">
-            {{ item.specified_address }}
-          </div>
-          <div class="label-block">
-            <span>小吃</span><span>4D厅</span><span>巨幕厅</span
-            ><span>杜比全景声厅</span>
-          </div>
-        </div>
-      </div></router-link
+    <div
+      class="cinema-item"
+      v-for="item in data"
+      :key="item.cinema_id"
+      @click="gotoDetail(item.cinema_id)"
     >
+      <div class="left">
+        <div class="cinema-name ellipsis">{{ item.cinema_name }}</div>
+        <div class="cinema-address ellipsis">
+          {{ item.specified_address }}
+        </div>
+        <div class="label-block">
+          <span>小吃</span><span>4D厅</span><span>巨幕厅</span
+          ><span>杜比全景声厅</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -29,7 +32,18 @@ export default {
   mounted() {
     axios.get("http://101.43.168.167:3000/api/getCinemaList").then((res) => {
       this.data = res.data.data;
+      console.log(this.data);
     });
+  },
+  methods: {
+    gotoDetail(id) {
+      this.$router.push({
+        path: "/CinemaDetail",
+        query: {
+          cinema_id: id,
+        },
+      });
+    },
   },
 };
 </script>

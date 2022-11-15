@@ -7,7 +7,7 @@
     <span class="normal" :class="{ active: !isActive }" @click="HandleChange"
       >即将上映</span
     >
-    <span class="">1</span>
+    <span class=""><router-link to="/SearchMovie">12</router-link></span>
   </div>
 </template>
 
