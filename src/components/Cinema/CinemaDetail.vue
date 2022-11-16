@@ -52,7 +52,12 @@
           <span class="ii-hall">{{ item.hall_name }}</span>
         </div>
         <div style="color: rgb(224, 60, 60)">{{ item.price }}.00元</div>
-        <div class="btn_buy"><span>购票</span></div>
+        <div class="btn_buy">
+          <span
+            @click="gotoselect(item.schedule_id, item.cinema_id, item.movie_id)"
+            >购票</span
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -122,17 +127,34 @@ export default {
           item.style.transform = "translateX(95.7499vw) scale(0.83)";
         }
       });
+      this.right(this.currentIndex);
       this.flag = 0;
     }
   },
 
   methods: {
+    gotoselect(schedule_id, cinema_id, movie_id) {
+      console.log(schedule_id, cinema_id, movie_id);
+      this.$router.push({
+        path: "/ChoseSeat",
+        query: {
+          schedule_id,
+          cinema_id,
+          movie_id,
+        },
+      });
+    },
     getCinemaDetail(id) {
       axios
         .get(`api/getCurrentCinemaMovieSchedule?cinemaId=${id}`)
         .then((res) => {
           this.movieInfo = res.data.data.hasMovieInfo;
           this.movieSchedule = res.data.data.movieScheduleInfo;
+          this.movieInfo.forEach((item, index) => {
+            if (item.name == this.$route.query.name) {
+              this.currentIndex = index;
+            }
+          });
         });
     },
     getMovie(id) {
@@ -152,63 +174,65 @@ export default {
         });
       }
       if (index > this.currentIndex) {
-        this.$refs.span1.innerText = this.movieInfo[this.currentIndex + 1].name;
-        this.$refs.span2.innerText =
-          this.movieInfo[this.currentIndex + 1].score || "暂无评分";
-        this.$refs.span3.innerText =
-          this.movieInfo[this.currentIndex + 1].movie_long;
-        this.$refs.span4.innerText = this.movieInfo[this.currentIndex + 1].type;
-        this.$refs.span5.innerText =
-          this.movieInfo[this.currentIndex + 1].actor;
-        this.currentIndex = index;
-        //////////////////////////////////////////////////////////////////
-        this.$nextTick(() => {
-          this.imgarr[index].style.zIndex = "2";
-          this.imgarr[index].style.transform = "translateX(25vw) scale(1)";
-          if (this.currentIndex >= 2) {
-            this.imgarr[this.currentIndex - 2].style.transform =
-              "translateX(-45.7499vw) scale(0.83)";
-          }
-          this.imgarr[this.currentIndex - 1].style.zIndex = "1";
-          this.imgarr[this.currentIndex - 1].style.transform =
-            "translateX(-4.25vw) scale(0.83)";
-          if (this.currentIndex != this.imgarr.length - 1) {
-            this.imgarr[this.currentIndex + 1].style.zIndex = "1";
-            this.imgarr[this.currentIndex + 1].style.transform =
-              "translateX(54.2501vw) scale(0.83)";
-          }
-        });
+        this.right(index);
       }
       if (index < this.currentIndex) {
-        this.$refs.span1.innerText = this.movieInfo[this.currentIndex - 1].name;
-        this.$refs.span2.innerText =
-          this.movieInfo[this.currentIndex - 1].score || "暂无评分";
-        this.$refs.span3.innerText =
-          this.movieInfo[this.currentIndex - 1].movie_long;
-        this.$refs.span4.innerText = this.movieInfo[this.currentIndex - 1].type;
-        this.$refs.span5.innerText =
-          this.movieInfo[this.currentIndex - 1].actor;
-        this.currentIndex = index;
-        //////////////////////////////////////////////////////////////////
-        this.$nextTick(() => {
-          this.imgarr[this.currentIndex].style.zIndex = "2";
-          this.imgarr[this.currentIndex].style.transform =
-            "translateX(25vw) scale(1)";
+        this.left(index);
+      }
+    },
+    right(index) {
+      this.$refs.span1.innerText = this.movieInfo[this.currentIndex + 1].name;
+      this.$refs.span2.innerText =
+        this.movieInfo[this.currentIndex + 1].score || "暂无评分";
+      this.$refs.span3.innerText =
+        this.movieInfo[this.currentIndex + 1].movie_long;
+      this.$refs.span4.innerText = this.movieInfo[this.currentIndex + 1].type;
+      this.$refs.span5.innerText = this.movieInfo[this.currentIndex + 1].actor;
+      this.currentIndex = index;
+      this.$nextTick(() => {
+        this.imgarr[index].style.zIndex = "2";
+        this.imgarr[index].style.transform = "translateX(25vw) scale(1)";
+        if (this.currentIndex >= 2) {
+          this.imgarr[this.currentIndex - 2].style.transform =
+            "translateX(-45.7499vw) scale(0.83)";
+        }
+        this.imgarr[this.currentIndex - 1].style.zIndex = "1";
+        this.imgarr[this.currentIndex - 1].style.transform =
+          "translateX(-4.25vw) scale(0.83)";
+        if (this.currentIndex != this.imgarr.length - 1) {
           this.imgarr[this.currentIndex + 1].style.zIndex = "1";
           this.imgarr[this.currentIndex + 1].style.transform =
             "translateX(54.2501vw) scale(0.83)";
-          if (this.currentIndex + 1 != this.imgarr.length - 1) {
-            this.imgarr[this.currentIndex + 2].style.zIndex = "1";
-            this.imgarr[this.currentIndex + 2].style.transform =
-              "translateX(95.7499vw) scale(0.83)";
-          }
-          if (this.currentIndex != 0) {
-            this.imgarr[this.currentIndex - 1].style.zIndex = "1";
-            this.imgarr[this.currentIndex - 1].style.transform =
-              "translateX(-4.25vw) scale(0.83)";
-          }
-        });
-      }
+        }
+      });
+    },
+    left(index) {
+      this.$refs.span1.innerText = this.movieInfo[this.currentIndex - 1].name;
+      this.$refs.span2.innerText =
+        this.movieInfo[this.currentIndex - 1].score || "暂无评分";
+      this.$refs.span3.innerText =
+        this.movieInfo[this.currentIndex - 1].movie_long;
+      this.$refs.span4.innerText = this.movieInfo[this.currentIndex - 1].type;
+      this.$refs.span5.innerText = this.movieInfo[this.currentIndex - 1].actor;
+      this.currentIndex = index;
+      this.$nextTick(() => {
+        this.imgarr[this.currentIndex].style.zIndex = "2";
+        this.imgarr[this.currentIndex].style.transform =
+          "translateX(25vw) scale(1)";
+        this.imgarr[this.currentIndex + 1].style.zIndex = "1";
+        this.imgarr[this.currentIndex + 1].style.transform =
+          "translateX(54.2501vw) scale(0.83)";
+        if (this.currentIndex + 1 != this.imgarr.length - 1) {
+          this.imgarr[this.currentIndex + 2].style.zIndex = "1";
+          this.imgarr[this.currentIndex + 2].style.transform =
+            "translateX(95.7499vw) scale(0.83)";
+        }
+        if (this.currentIndex != 0) {
+          this.imgarr[this.currentIndex - 1].style.zIndex = "1";
+          this.imgarr[this.currentIndex - 1].style.transform =
+            "translateX(-4.25vw) scale(0.83)";
+        }
+      });
     },
   },
 };

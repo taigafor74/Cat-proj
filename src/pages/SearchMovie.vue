@@ -5,7 +5,7 @@
         <span><img src="../assets/搜索.png" /></span>
         <input type="text" v-model="movieName" placeholder="搜影片" />
       </div>
-      <span class="sm-cancel">取消</span>
+      <span class="sm-cancel" @click="$router.go(-1)">取消</span>
     </div>
     <div class="sm-con">
       <div class="sm-item" v-for="(item, index) in data" :key="index">

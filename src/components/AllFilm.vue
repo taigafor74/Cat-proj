@@ -20,7 +20,9 @@
               <div class="detailR">主演:{{ item.actor }}</div>
               <div class="detailR">今天100家影院放映280场</div>
             </div>
-            <button><span>购票</span></button>
+            <button @click.prevent="gotoselect(item.movie_id)">
+              <span>购票</span>
+            </button>
           </div>
         </div>
       </router-link>
@@ -49,6 +51,16 @@ export default {
   },
   updated() {
     this.show = false;
+  },
+  methods: {
+    gotoselect(id) {
+      this.$router.push({
+        path: "/BuyCinema",
+        query: {
+          movie_id: id,
+        },
+      });
+    },
   },
 };
 </script>

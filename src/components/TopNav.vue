@@ -12,7 +12,7 @@
         <a class="fora">经典电影</a>
       </div>
       <div class="topsearch">
-        <img src="../assets/search-red.png" />
+        <img @click="gotosearch" src="../assets/search-red.png" />
       </div>
     </div>
   </div>
@@ -21,6 +21,13 @@
 <script>
 export default {
   name: "TopNav",
+  methods: {
+    gotosearch() {
+      this.$router.push({
+        path: "/SearchAll",
+      });
+    },
+  },
 };
 </script>
 

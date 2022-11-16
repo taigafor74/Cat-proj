@@ -1,6 +1,6 @@
 <template>
   <div>
-    <UserLogin></UserLogin>
+    <UserFace></UserFace>
     <div style="height: 12.9787vw"></div>
     <div class="fixedb">
       <BottomBar></BottomBar>
@@ -10,8 +10,11 @@
 
 <script>
 import BottomBar from "../components/BottomBar.vue";
-import UserLogin from "../components/UserControl/UserLogin.vue";
-export default { name: "UserPage", components: { BottomBar, UserLogin } };
+import UserFace from "@/components/UserControl/UserFace.vue";
+export default {
+  name: "UserPage",
+  components: { BottomBar, UserFace },
+};
 </script>
 
 <style>

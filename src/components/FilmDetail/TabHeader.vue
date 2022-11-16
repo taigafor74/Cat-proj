@@ -7,7 +7,10 @@
     <span class="normal" :class="{ active: !isActive }" @click="HandleChange"
       >即将上映</span
     >
-    <span class=""><router-link to="/SearchMovie">12</router-link></span>
+    <span class="f-icon"
+      ><router-link to="/SearchMovie"
+        ><img src="../../assets/搜索.png" /></router-link
+    ></span>
   </div>
 </template>
 
@@ -41,6 +44,13 @@ export default {
   left: 0;
   top: 0;
   z-index: 999;
+}
+.f-icon {
+  margin-top: 1.8333vw;
+}
+a img {
+  width: 6.4vw;
+  height: 6.4vw;
 }
 .normal {
   opacity: 0.6;

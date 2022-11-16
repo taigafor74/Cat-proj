@@ -22,29 +22,54 @@
             </div>
           </div>
           <div class="login-phone" v-show="!flag">
-            <input class="login-input" placeholder="用户名" />
+            <input class="login-input" v-model="pwdName" placeholder="用户名" />
             <button class="eyes">123</button>
-            <input class="login-input" placeholder="密码" />
-            <div class="captcha">ffff</div>
-            <input class="login-input" placeholder="验证码" />
+            <input class="login-input" v-model="pwdPass" placeholder="密码" />
+            <div class="captcha" ref="captcha" @click="changeCpatcha"></div>
+            <input class="login-input" v-model="pwdCap" placeholder="验证码" />
           </div>
         </form>
       </div>
 
-      <button class="login-button">登录</button>
+      <button class="login-button" @click="pwdLogin">登录</button>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "UserLogin",
   data() {
     return {
       flag: true,
+      pwdName: "",
+      pwdPass: "",
+      pwdCap: "",
     };
   },
+  mounted() {
+    axios.get("/api/captcha").then((res) => {
+      this.$refs.captcha.innerHTML = res.data;
+    });
+  },
   methods: {
+    pwdLogin() {
+      axios
+        .post("/api/pwdLogin", {
+          userName: this.pwdName,
+          password: this.pwdPass,
+          captcha: this.pwdCap,
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    },
+    changeCpatcha() {
+      axios.get("/api/captcha").then((res) => {
+        this.$refs.captcha.innerHTML = res.data;
+      });
+    },
     changeClass1() {
       let arr = Array.from(this.$refs.type.children);
       arr.forEach((item) => {
@@ -72,6 +97,10 @@ export default {
   top: 30.6vw;
   z-index: 999;
   right: 16px;
+}
+svg {
+  width: 21.7584vw;
+  height: 7.2528vw;
 }
 .eyes {
   position: absolute;

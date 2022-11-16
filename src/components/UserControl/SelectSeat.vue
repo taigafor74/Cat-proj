@@ -2,7 +2,7 @@
   <div>
     <div class="holecontainer">
       <div class="top-box">
-        <div class="screen">1号激光厅银幕</div>
+        <div class="screen">{{ schedule.hall_name }}</div>
         <div class="selectIntro">
           <div><img :src="picUrl" />可选</div>
           <div><img :src="cantPic" />不可选</div>
@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import axios from "@/utils/request";
+
 export default {
   name: "SelectSeat",
   data() {
@@ -60,9 +62,36 @@ export default {
       cantPic: require("../../assets/座位 (3).png"),
       seatCount: 0,
       seat: [],
+      seat_info: [],
+      alert4: true,
+      schedule: {},
     };
   },
+
+  mounted() {
+    this.getSchedule(this.$route.query.schedule_id);
+  },
   methods: {
+    getSchedule(id) {
+      axios.get(`/api/getScheduleById?scheduleId=${id}`).then((res) => {
+        this.schedule = res.data.data;
+
+        this.seat_info = this.schedule.seat_info.split(",");
+        console.log(this.schedule.seat_info);
+        if (this.schedule.seat_info != "[]") {
+          this.seat_info[0] = this.seat_info[0].replace("[", "");
+          this.seat_info[this.seat_info.length - 1] = this.seat_info[
+            this.seat_info.length - 1
+          ].replace("]", "");
+          this.seat_info = this.seat_info.map((item) => {
+            return item - 1;
+          });
+          this.seat_info.forEach((item) => {
+            this.$refs.img[item].src = this.cantPic;
+          });
+        }
+      });
+    },
     deletespan(item, index) {
       const originColumn = item.column - 1;
       const originRow = item.row - 1;
@@ -80,8 +109,6 @@ export default {
       const row = index + 1;
       let repeatindex = 0;
       let flag = false;
-      e.path[0].src =
-        e.path[0].src == this.selectPic ? this.picUrl : this.selectPic;
       if (this.seat.length) {
         this.seat.forEach((item, index) => {
           if (item.row == row && item.column == column) {
@@ -90,12 +117,24 @@ export default {
           }
         });
       }
-      if (flag) {
-        this.seat.splice(repeatindex, 1);
-        this.seatCount--;
-      } else {
-        this.seat.push({ row, column });
-        this.seatCount++;
+      if (e.path[0].src != this.cantPic) {
+        if (flag) {
+          e.path[0].src =
+            e.path[0].src == this.selectPic ? this.picUrl : this.selectPic;
+          this.seat.splice(repeatindex, 1);
+          this.seatCount--;
+          this.alert4 = true;
+        } else {
+          if (this.alert4) {
+            e.path[0].src =
+              e.path[0].src == this.selectPic ? this.picUrl : this.selectPic;
+            this.seat.push({ row, column });
+            this.seatCount++;
+            if (this.seat.length == 4) {
+              this.alert4 = false;
+            }
+          }
+        }
       }
     },
   },

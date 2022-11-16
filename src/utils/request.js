@@ -1,6 +1,6 @@
 import axios from "axios";
 import store from "../store";
-axios.defaults.baseURL = "http://localhost:3000";
+// axios.defaults.baseURL = "http://localhost:3000";
 /**
  * 设置超时时间和跨域是否允许携带凭证
  */
