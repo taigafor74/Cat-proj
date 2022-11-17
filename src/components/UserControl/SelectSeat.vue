@@ -43,7 +43,7 @@
             </div>
           </div>
         </div>
-        <div class="c-down">确认选座</div>
+        <div class="c-down" @click="toConfirm">确认选座</div>
       </div>
     </div>
   </div>
@@ -65,20 +65,45 @@ export default {
       seat_info: [],
       alert4: true,
       schedule: {},
+      commitSeat: [],
+      mySeat: [],
     };
   },
 
   mounted() {
     this.getSchedule(this.$route.query.schedule_id);
+    console.log(this.commitSeat);
   },
   methods: {
+    toConfirm() {
+      this.seat.forEach((item) => {
+        let i = item.column - 1 + (item.row - 1) * 10;
+        this.$store.state.commitSeat.push(i);
+        this.commitSeat.push(i);
+      });
+      this.$store.state.seatInfo = this.commitSeat;
+      this.$store.state.mySeat = this.seat;
+
+      this.$router.push({
+        path: "/ConfirmBill",
+        query: {
+          schedule_id: this.$route.query.schedule_id,
+          movie_id: this.$route.query.movie_id,
+          cinema_id: this.$route.query.cinema_id,
+        },
+      });
+    },
     getSchedule(id) {
       axios.get(`/api/getScheduleById?scheduleId=${id}`).then((res) => {
+        console.log(this.$refs.img);
         this.schedule = res.data.data;
-
-        this.seat_info = this.schedule.seat_info.split(",");
-        console.log(this.schedule.seat_info);
-        if (this.schedule.seat_info != "[]") {
+        if (this.schedule.seat_info != null) {
+          this.seat_info = this.schedule.seat_info.split(",");
+        }
+        if (
+          this.schedule.seat_info != "[]" &&
+          this.schedule.seat_info != null
+        ) {
           this.seat_info[0] = this.seat_info[0].replace("[", "");
           this.seat_info[this.seat_info.length - 1] = this.seat_info[
             this.seat_info.length - 1
@@ -87,6 +112,7 @@ export default {
             return item - 1;
           });
           this.seat_info.forEach((item) => {
+            this.commitSeat.push(item);
             this.$refs.img[item].src = this.cantPic;
           });
         }

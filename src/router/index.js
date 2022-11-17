@@ -12,9 +12,14 @@ import CinemaDetail from "../components/Cinema/CinemaDetail";
 import UserPage from "../pages/UserPage";
 import SearchMovie from "../pages/SearchMovie";
 import SearchCinema from "../pages/SearchCinema";
+import ConfirmBill from "../pages/ConfirmBill";
 import SearchAll from "../pages/SearchAll";
+import PayPage from "../pages/PayPage";
 import BuyCinema from "../pages/BuyCinema";
 import UserLogin from "../components/UserControl/UserLogin";
+import MyOrder from "../components/UserControl/MyOrder";
+import MyInfo from "../components/UserControl/MyInfo";
+import MyMovie from "../components/UserControl/MyMovie";
 export default new VueRouter({
   routes: [
     {
@@ -42,8 +47,28 @@ export default new VueRouter({
       component: UserLogin,
     },
     {
+      path: "/ConfirmBill",
+      component: ConfirmBill,
+    },
+    {
       path: "/UserPage",
       component: UserPage,
+    },
+    {
+      path: "/MyInfo",
+      component: MyInfo,
+    },
+    {
+      path: "/PayPage",
+      component: PayPage,
+    },
+    {
+      path: "/MyOrder",
+      component: MyOrder,
+    },
+    {
+      path: "/MyMovie",
+      component: MyMovie,
     },
     {
       path: "/SearchMovie",

@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="user-header">
+    <div class="user-header" @click="gotologin">
       <div class="user-left">
         <div class="user-avatar">
-          <img />
+          <img :src="baseUrl + data.avatar" />
         </div>
-        <span @click="gotologin">登录/注册</span>
+        <span>{{ data.user_name || "登录/注册" }}</span>
       </div>
     </div>
     <div class="user-content">
@@ -17,13 +17,39 @@
 </template>
 
 <script>
+import axios from "@/utils/request";
 export default {
   name: "UserFace",
+  data() {
+    return {
+      data: {},
+      baseUrl: "http://101.43.168.167:3000",
+    };
+  },
+  mounted() {
+    if (this.$store.state.cookie) {
+      axios
+        .get(`/api/getUserInfo?userId=${this.$store.getters.cookie}`)
+        .then((res) => {
+          this.data = res.data.data;
+          console.log(this.data);
+        });
+    }
+  },
   methods: {
     gotologin() {
-      this.$router.push({
-        path: "/UserLogin",
-      });
+      if (!document.cookie) {
+        this.$router.push({
+          path: "/UserLogin",
+        });
+      } else {
+        this.$router.push({
+          path: "/MyInfo",
+          query: {
+            userId: this.$store.getters.cookie,
+          },
+        });
+      }
     },
   },
 };

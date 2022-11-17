@@ -36,7 +36,7 @@ export default {
   name: "AllFilm",
   data() {
     return {
-      basicUrl: "http://localhost:3000",
+      basicUrl: "http://101.43.168.167:3000",
       data: [],
       show: true,
     };

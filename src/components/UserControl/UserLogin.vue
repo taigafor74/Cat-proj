@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="LoginContainer">
-      <div class="login-top"><img src="../../assets/取消.png" /></div>
+      <div class="login-top">
+        <img @click="$router.go(-1)" src="../../assets/取消.png" />
+      </div>
       <div class="header-logo">
         <img src="../../assets/电影院-激活.png" />
         <p>Made by kwn74</p>
@@ -49,6 +51,7 @@ export default {
     };
   },
   mounted() {
+    console.log(document.cookie);
     axios.get("/api/captcha").then((res) => {
       this.$refs.captcha.innerHTML = res.data;
     });

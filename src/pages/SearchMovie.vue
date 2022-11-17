@@ -43,7 +43,7 @@ export default {
     return {
       data: [],
       movieName: "",
-      baseUrl: "http://localhost:3000",
+      baseUrl: "http://101.43.168.167:3000",
     };
   },
   watch: {

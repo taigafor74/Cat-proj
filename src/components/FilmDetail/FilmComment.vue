@@ -58,7 +58,7 @@ export default {
 .commentCon {
   width: 100%;
   padding: 3.3333vw;
-  background-color: rgb(24, 26, 27);
+  background-color: rgb(247, 251, 253);
   border-top-left-radius: 2.6667vw;
   border-top-right-radius: 2.6667vw;
   overflow: hidden;

@@ -19,12 +19,12 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "@/utils/request";
 export default {
   name: "ScrollFilm",
   data() {
     return {
-      basicUrl: "http://101.43.168.167:3000/",
+      basicUrl: "http://101.43.168.167:3000",
       data: [],
     };
   },
@@ -35,12 +35,10 @@ export default {
     },
   },
   mounted() {
-    axios
-      .get("http://101.43.168.167:3000/api/admin/getAllMovie")
-      .then((res) => {
-        this.data = res.data.data;
-        // console.log(this.data);
-      });
+    axios.get("/api/admin/getAllMovie").then((res) => {
+      this.data = res.data.data;
+      // console.log(this.data);
+    });
   },
 };
 </script>

@@ -88,7 +88,7 @@ a {
 }
 .bottom a {
   display: flex;
-  color: white;
+  color: rgb(0, 0, 0);
   flex: 1;
   flex-direction: column;
   justify-content: center;

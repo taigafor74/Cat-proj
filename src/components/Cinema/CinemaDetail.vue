@@ -69,7 +69,7 @@ export default {
   name: "CinemaDetail",
   data() {
     return {
-      imgList: require("../../assets/hot1.jpg"),
+      imgList: "",
       movieInfo: [],
       baseUrl: "http://101.43.168.167:3000",
       movieSchedule: [],
@@ -106,31 +106,40 @@ export default {
     // this.imgarr[3].style.transform = "translateX(95.7499vw) scale(0.83)";
     // this.imgarr[4].style.transform = "translateX(95.7499vw) scale(0.83)";
   },
-  updated() {
-    if (this.flag == 1) {
-      this.$refs.span1.innerText = this.movieInfo[this.currentIndex].name;
-      this.$refs.span2.innerText =
-        this.movieInfo[this.currentIndex].score || "暂无评分";
-      this.$refs.span3.innerText = this.movieInfo[this.currentIndex].movie_long;
-      this.$refs.span4.innerText = this.movieInfo[this.currentIndex].type;
-      this.$refs.span5.innerText = this.movieInfo[this.currentIndex].actor;
-      this.imgarr = this.$refs["imglist"];
-      this.imgarr.forEach((item, index) => {
-        if (index == 0) {
-          item.style.transform = "translateX(25vw) scale(1)";
-          item.style.zIndex = "2";
-        } else if (index == 1) {
-          item.style.transform = "translateX(54.2501vw) scale(0.83)";
-        } else if (index == 2) {
-          item.style.transform = "translateX(95.7499vw) scale(0.83)";
-        } else {
-          item.style.transform = "translateX(95.7499vw) scale(0.83)";
+  watch: {
+    movieInfo: {
+      deep: true,
+      handler(newval) {
+        if (this.flag == 1) {
+          this.$refs.span1.innerText = newval[this.currentIndex].name;
+          this.$refs.span2.innerText =
+            newval[this.currentIndex].score || "暂无评分";
+          this.$refs.span3.innerText = newval[this.currentIndex].movie_long;
+          this.$refs.span4.innerText = newval[this.currentIndex].type;
+          this.$refs.span5.innerText = newval[this.currentIndex].actor;
+          this.$nextTick(() => {
+            this.imgarr = this.$refs["imglist"];
+            this.imgarr.forEach((item, index) => {
+              if (index == 0) {
+                item.style.transform = "translateX(25vw) scale(1)";
+                item.style.zIndex = "2";
+              } else if (index == 1) {
+                item.style.transform = "translateX(54.2501vw) scale(0.83)";
+              } else if (index == 2) {
+                item.style.transform = "translateX(95.7499vw) scale(0.83)";
+              } else {
+                item.style.transform = "translateX(95.7499vw) scale(0.83)";
+              }
+            });
+          });
+
+          this.right(this.currentIndex);
+          this.flag = 0;
         }
-      });
-      this.right(this.currentIndex);
-      this.flag = 0;
-    }
+      },
+    },
   },
+  updated() {},
 
   methods: {
     gotoselect(schedule_id, cinema_id, movie_id) {
@@ -181,13 +190,13 @@ export default {
       }
     },
     right(index) {
-      this.$refs.span1.innerText = this.movieInfo[this.currentIndex + 1].name;
-      this.$refs.span2.innerText =
-        this.movieInfo[this.currentIndex + 1].score || "暂无评分";
-      this.$refs.span3.innerText =
-        this.movieInfo[this.currentIndex + 1].movie_long;
-      this.$refs.span4.innerText = this.movieInfo[this.currentIndex + 1].type;
-      this.$refs.span5.innerText = this.movieInfo[this.currentIndex + 1].actor;
+      console.log(this.movieInfo);
+      this.$refs.span1.innerText = this.movieInfo[index].name;
+      this.$refs.span2.innerText = this.movieInfo[index].score || "暂无评分";
+      this.$refs.span3.innerText = this.movieInfo[index].movie_long;
+      this.$refs.span4.innerText = this.movieInfo[index].type;
+      this.$refs.span5.innerText = this.movieInfo[index].actor;
+
       this.currentIndex = index;
       this.$nextTick(() => {
         this.imgarr[index].style.zIndex = "2";
@@ -196,9 +205,11 @@ export default {
           this.imgarr[this.currentIndex - 2].style.transform =
             "translateX(-45.7499vw) scale(0.83)";
         }
-        this.imgarr[this.currentIndex - 1].style.zIndex = "1";
-        this.imgarr[this.currentIndex - 1].style.transform =
-          "translateX(-4.25vw) scale(0.83)";
+        if (this.currentIndex != 0) {
+          this.imgarr[this.currentIndex - 1].style.zIndex = "1";
+          this.imgarr[this.currentIndex - 1].style.transform =
+            "translateX(-4.25vw) scale(0.83)";
+        }
         if (this.currentIndex != this.imgarr.length - 1) {
           this.imgarr[this.currentIndex + 1].style.zIndex = "1";
           this.imgarr[this.currentIndex + 1].style.transform =
@@ -256,7 +267,7 @@ export default {
   height: 5.0667vw;
 }
 .cinema-info div:nth-child(1) {
-  color: #fff;
+  color: rgb(0, 0, 0);
   font-size: 4.6vw;
   font-weight: 700;
   margin-bottom: 3.3333vw;
