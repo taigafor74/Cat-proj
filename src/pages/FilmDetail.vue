@@ -12,7 +12,7 @@
     </div>
     <div style="height: 16vw"></div>
     <div class="fix-b">
-      <FilmBottom />
+      <FilmBottom :movie_id="movie_id" />
     </div>
   </div>
 </template>
@@ -34,6 +34,7 @@ export default {
       overview: {},
       intro: "",
       commentData: {},
+      movie_id: this.$route.query.movie_id,
     };
   },
   components: {

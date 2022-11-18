@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "@/utils/request";
 export default {
   name: "AllCinema",
   data() {
@@ -30,7 +30,7 @@ export default {
     };
   },
   mounted() {
-    axios.get("http://101.43.168.167:3000/api/getCinemaList").then((res) => {
+    axios.get("/api/getCinemaList").then((res) => {
       this.data = res.data.data;
       console.log(this.data);
     });

@@ -2,7 +2,8 @@
   <div>
     <TabHeader></TabHeader>
     <div style="height: 13.3333vw"></div>
-    <AllFilm></AllFilm>
+    <!-- <AllFilm></AllFilm> -->
+    <router-view></router-view>
     <div style="height: 12.9787vw"></div>
     <div class="fixedb">
       <BottomBar></BottomBar>
@@ -11,12 +12,12 @@
 </template>
 
 <script>
-import AllFilm from "../components/AllFilm.vue";
+// import AllFilm from "../components/AllFilm.vue";
 import BottomBar from "../components/BottomBar.vue";
 import TabHeader from "../components/FilmDetail/TabHeader.vue";
 export default {
   name: "FilmPage",
-  components: { AllFilm, BottomBar, TabHeader },
+  components: { BottomBar, TabHeader },
 };
 </script>
 

@@ -6,10 +6,10 @@
         <img src="../assets/下箭头.png" />
       </div>
       <div class="toptitle">
-        <a class="fora">热映</a>
-        <a class="fora">影院</a>
-        <a class="fora">待映</a>
-        <a class="fora">经典电影</a>
+        <router-link to="/FilmPage/AllFilm" class="fora">热映</router-link>
+        <router-link to="/CinemaPage" class="fora">影院</router-link>
+        <router-link to="/FilmPage/AllfilmNo" class="fora">待映</router-link>
+        <router-link to="/FilmPage/AllFilm" class="fora">经典电影</router-link>
       </div>
       <div class="topsearch">
         <img @click="gotosearch" src="../assets/search-red.png" />

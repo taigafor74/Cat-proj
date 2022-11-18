@@ -25,6 +25,7 @@
         </div>
       </div>
     </div>
+    <div class="exit-btn" @click="exit">退出登录</div>
   </div>
 </template>
 
@@ -40,6 +41,34 @@ export default {
       baseUrl: "http://101.43.168.167:3000",
     };
   },
+  methods: {
+    exit() {
+      this.clearCookie();
+      alert("退出成功");
+      this.$router.push({ path: "/UserPage" });
+      this.$router.go(0);
+    },
+    clearCookie() {
+      var keys = document.cookie.match(/[^ =;]+(?==)/g);
+      if (keys) {
+        for (var i = keys.length; i--; ) {
+          document.cookie =
+            keys[i] + "=0;path=/;expires=" + new Date(0).toUTCString(); //清除当前域名下的,例如：m.kevis.com
+          document.cookie =
+            keys[i] +
+            "=0;path=/;domain=" +
+            document.domain +
+            ";expires=" +
+            new Date(0).toUTCString(); //清除当前域名下的，例如 .m.kevis.com
+          document.cookie =
+            keys[i] +
+            "=0;path=/;domain=kevis.com;expires=" +
+            new Date(0).toUTCString(); //清除一级域名下的或指定的，例如 .kevis.com
+        }
+      }
+      console.log("已清除");
+    },
+  },
   mounted() {
     axios
       .get(`/api/getUserInfo?userId=${this.$route.query.userId}`)
@@ -52,6 +81,19 @@ export default {
 </script>
 
 <style scoped>
+.exit-btn {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  height: 13.3333vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: orangered;
+  border-top-left-radius: 2.6667vw;
+  border-top-right-radius: 2.6667vw;
+}
 .user_info {
   background-color: rgb(255, 255, 255);
   font-size: 4.2667vw;

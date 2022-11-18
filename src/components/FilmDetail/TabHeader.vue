@@ -1,10 +1,10 @@
 <template>
   <div class="tabHeader">
     <span class="location">广州</span>
-    <span class="normal" :class="{ active: isActive }" @click="HandleChange"
+    <span class="normal" :class="{ active: isActive }" @click="HandleChange(1)"
       >正在热映</span
     >
-    <span class="normal" :class="{ active: !isActive }" @click="HandleChange"
+    <span class="normal" :class="{ active: !isActive }" @click="HandleChange(2)"
       >即将上映</span
     >
     <span class="f-icon"
@@ -19,12 +19,25 @@ export default {
   name: "TabHeader",
   data() {
     return {
-      isActive: 0,
+      isActive: 1,
     };
   },
+  mounted() {
+    if (this.$route.fullPath == "/FilmPage/AllFilm") {
+      this.isActive = 1;
+    } else {
+      this.isActive = 0;
+    }
+  },
   methods: {
-    HandleChange() {
+    HandleChange(num) {
       this.isActive = !this.isActive;
+      if (num == 1) {
+        this.$router.push({ path: "/FilmPage/AllFilm" });
+      }
+      if (num == 2) {
+        this.$router.push({ path: "/FilmPage/AllfilmNo" });
+      }
     },
   },
 };

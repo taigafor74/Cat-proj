@@ -20,7 +20,17 @@ Vue.use(Uploader);
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
-
+router.beforeEach((to, from, next) => {
+  if (to.meta.permission) {
+    if (document.cookie) {
+      next();
+    } else {
+      next("/UserLogin");
+    }
+  } else {
+    next();
+  }
+});
 new Vue({
   el: "#app",
   render: (h) => h(App),

@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="div-btn">
-        <button class="btn">
+        <button class="btn" @click="wanna($event)">
           <img
             src="https://obj.pipi.cn/festatic/asgard/resources/images/movie/want-to-watch.png"
           />
@@ -42,7 +42,7 @@
           <img
             src="https://obj.pipi.cn/festatic/asgard/resources/images/movie/want-to-watch.png"
           />
-          <span>想看</span>
+          <span>看过</span>
         </button>
       </div>
     </div>
@@ -52,11 +52,18 @@
 <script>
 export default {
   name: "FilmOverview",
+
   props: ["overview"],
   data() {
     return {
       basicUrl: "http://101.43.168.167:3000/",
     };
+  },
+  methods: {
+    wanna(e) {
+      console.log(e);
+      e.target.classList.toggle("btn-active");
+    },
   },
 };
 </script>
@@ -77,6 +84,9 @@ export default {
 .AtoV img {
   width: 26.6667vw;
   height: 36.8vw;
+}
+.btn-active {
+  background-color: hsla(63, 97%, 52%, 0.35) !important;
 }
 .overview {
   flex: 1;

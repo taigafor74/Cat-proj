@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="user-content">
-      <div class="user-item">我的订单</div>
+      <div class="user-item" @click="goorder">我的订单</div>
       <div class="user-item">想看的电影</div>
       <div class="user-item">看过的电影</div>
     </div>
@@ -37,6 +37,11 @@ export default {
     }
   },
   methods: {
+    goorder() {
+      this.$router.push({
+        path: "/MyOrder",
+      });
+    },
     gotologin() {
       if (!document.cookie) {
         this.$router.push({

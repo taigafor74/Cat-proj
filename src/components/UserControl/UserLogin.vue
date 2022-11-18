@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "@/utils/request";
 export default {
   name: "UserLogin",
   data() {
@@ -65,7 +65,15 @@ export default {
           captcha: this.pwdCap,
         })
         .then((res) => {
-          console.log(res);
+          if (res.data.success_code == 200) {
+            alert("登陆成功!");
+            this.$router.push({ path: "/" });
+            this.$router.go(0);
+          } else {
+            alert("登陆失败,请检查信息!");
+            this.$router.push({ path: "/" });
+            this.$router.go(0);
+          }
         });
     },
     changeCpatcha() {

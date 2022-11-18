@@ -1,8 +1,8 @@
 const { defineConfig } = require("@vue/cli-service");
 module.exports = defineConfig({
-  devServer: {
-    proxy: "http://localhost:3000",
-  },
+  // devServer: {
+  //   proxy: "http://localhost:3000",
+  // },
   // 跨域的代理中转服务器服务
   // proxyTable: {
   //   // '/api'会拦截axios请求中带有/api的请求

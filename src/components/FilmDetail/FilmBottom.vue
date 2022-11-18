@@ -3,12 +3,25 @@
     <img
       src="https://obj.pipi.cn/festatic/asgard/resources/images/movie/share-icon.png"
     />
-    <router-link to="/ChoseSeat" class="buyticket">特惠购票</router-link>
+    <div class="buyticket" @click="gotoselect()">特惠购票</div>
   </div>
 </template>
 
 <script>
-export default { name: "FilmBottom" };
+export default {
+  name: "FilmBottom",
+  props: ["movie_id"],
+  methods: {
+    gotoselect() {
+      this.$router.push({
+        path: "/BuyCinema",
+        query: {
+          movie_id: this.movie_id,
+        },
+      });
+    },
+  },
+};
 </script>
 
 <style>

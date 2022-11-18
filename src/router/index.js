@@ -20,6 +20,8 @@ import UserLogin from "../components/UserControl/UserLogin";
 import MyOrder from "../components/UserControl/MyOrder";
 import MyInfo from "../components/UserControl/MyInfo";
 import MyMovie from "../components/UserControl/MyMovie";
+import AllFilm from "../components/AllFilm";
+import AllfilmNo from "../components/AllfilmNo";
 export default new VueRouter({
   routes: [
     {
@@ -41,6 +43,16 @@ export default new VueRouter({
     {
       path: "/FilmPage",
       component: FilmPage,
+      children: [
+        {
+          path: "/FilmPage/AllFilm",
+          component: AllFilm,
+        },
+        {
+          path: "/FilmPage/AllfilmNo",
+          component: AllfilmNo,
+        },
+      ],
     },
     {
       path: "/UserLogin",
@@ -49,6 +61,7 @@ export default new VueRouter({
     {
       path: "/ConfirmBill",
       component: ConfirmBill,
+      meta: { permission: true },
     },
     {
       path: "/UserPage",

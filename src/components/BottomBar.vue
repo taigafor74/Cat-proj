@@ -37,7 +37,7 @@ export default {
           text: "我的",
         },
       ],
-      routerUrl: ["/", "/FilmPage", "/CinemaPage", "/UserPage"],
+      routerUrl: ["/", "/FilmPage/AllFilm", "/CinemaPage", "/UserPage"],
       currentIndex: 0,
     };
   },

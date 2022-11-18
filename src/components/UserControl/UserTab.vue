@@ -2,7 +2,7 @@
   <div>
     <div class="user-header">
       <span><img @click="$router.go(-1)" src="../../assets/上一页.png" /></span>
-      <span>我的资料</span>
+      <span>{{ detail }}</span>
     </div>
   </div>
 </template>
@@ -10,6 +10,17 @@
 <script>
 export default {
   name: "UserTab",
+  data() {
+    return {
+      detail: "我的资料",
+    };
+  },
+  mounted() {
+    console.log(this.$route.fullPath);
+    if (this.$route.fullPath == "/MyOrder") {
+      this.detail = "我的订单";
+    }
+  },
 };
 </script>
 
