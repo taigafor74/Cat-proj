@@ -217,6 +217,7 @@ export default {
         }
       });
     },
+    //no
     left(index) {
       this.$refs.span1.innerText = this.movieInfo[this.currentIndex - 1].name;
       this.$refs.span2.innerText =
